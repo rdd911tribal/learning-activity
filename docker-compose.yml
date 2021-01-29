@@ -1,0 +1,59 @@
+version: "3.6"
+volumes:
+  mongodb-data:
+networks:
+  learning-activity:
+    driver: bridge
+
+services:
+  db-mongo:
+    image: mongo:latest
+    container_name: db-mongo
+    restart: always
+    volumes:
+      - mongodb-data:/data/db
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+    networks:
+      - learning-activity
+  
+  api-team:
+    image: api-team:1.0.0
+    container_name: api-team
+    build:
+      context: api-team
+      dockerfile: ./Dockerfile
+    env_file:
+      - ./api-team/.env.docker
+    expose:
+      - "3011"
+    ports:
+      - "3011:3011"
+  
+  api-people:
+    image: api-people:1.0.0
+    container_name: api-people
+    build:
+      context: api-people
+      dockerfile: ./Dockerfile
+    env_file:
+      - ./api-people/.env.docker
+    expose:
+      - "4011"
+    ports:
+      - "4011:4011"
+  
+  api-ticket:
+    image: api-ticket:1.0.0
+    container_name: api-ticket
+    build:
+      context: api-ticket
+      dockerfile: ./Dockerfile
+    env_file:
+      - ./api-ticket/.env.docker
+    expose:
+      - "5011"
+    ports:
+      - "5011:5011"
