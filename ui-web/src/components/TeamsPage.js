@@ -9,9 +9,10 @@ export class TeamsPage extends React.Component {
         this.state = {
             data: []
         }
+        console.log(process.env.REACT_APP_TEAM_URL)
 
         this.teamsAPI = axios.create({
-            baseURL: 'http://localhost:3001',
+            baseURL: process.env.REACT_APP_TEAM_URL,
             headers: { 'Content-Type': 'application/json'}
         })
     }
@@ -32,14 +33,13 @@ export class TeamsPage extends React.Component {
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Designation</th>
                 </tr>
                 { this.state.data.map((item) => {
-                    const teamLink = "/team/" + item.id
-                    return (<tr>
+                    console.log(item);
+                    const taskLink = "/team/" + item.id
+                    return (<tr key={item.id}>
                         <td>{item.id}</td>
-                        <td><Link to={teamLink}>{item.name}</Link></td>
-                        <td>{item.designation}</td>
+                        <td><Link to={taskLink}>{item.name}</Link></td>
                     </tr>)
                 }) }
             </table> 

@@ -6,6 +6,7 @@ const LoadingComponent = () => <nav>Loading ...</nav>;
 
 const TeamsPage = lazy(() => import('./components/TeamsPage'));
 const TeamPage = lazy(() => import('./components/TeamPage'));
+const TasksPage = lazy(() => import('./components/TasksPage'));
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
             <Suspense fallback={<LoadingComponent />}>
                 <Switch>
                     <Route exact path="/teams" component={TeamsPage} />
-                    <Route exact path="/team/{id}" component={TeamPage} />
+                    <Route exact path="/team/:teamId" component={TeamPage} />
+                    <Route exact path="/tasks/:personId" component={TasksPage} />
                     <Route exact path="/" component={TeamsPage} />
                 </Switch>
             </Suspense>

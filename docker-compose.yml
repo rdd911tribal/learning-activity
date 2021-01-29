@@ -57,3 +57,13 @@ services:
       - "5011"
     ports:
       - "5011:5011"
+    
+  ui-web:
+    image: ui-web:0.1
+    container_name: ui-web
+    build:
+      context: ui-web
+      dockerfile: ./Dockerfile
+    ports:
+      - "5001:80"
+    restart: always

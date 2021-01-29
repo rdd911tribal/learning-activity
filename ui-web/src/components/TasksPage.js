@@ -1,8 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
-export class TeamPage extends React.Component {
+export class TasksPage extends React.Component {
 
     constructor (props) {
         super(props);
@@ -11,16 +10,15 @@ export class TeamPage extends React.Component {
         }
 
         this.teamsAPI = axios.create({
-            baseURL: process.env.REACT_APP_PEOPLE_URL,
+            baseURL: process.env.REACT_APP_TICKET_URL,
             headers: { 'Content-Type': 'application/json'}
         })
     }
 
     componentDidMount() {
-        const teamId = this.props.match.params.teamId;
-        this.teamsAPI.get('/tasks/'+teamId)
+        const personId = this.props.match.params.personId;
+        this.teamsAPI.get('/tickets/'+personId)
         .then(response => {
-            console.log(response)
             this.setState({
                 data: response.data
             });
@@ -31,22 +29,22 @@ export class TeamPage extends React.Component {
     render() {
         return (<div>  
             <table>
+                <thead>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Designation</th>
                 </tr>
-                { this.state.data.map((item) => {
-                    const teamLink = "/tasks/" + item.id
-                    return (<tr>
+                </thead>
+               <thead>
+               { this.state.data.map((item) => (<tr>
                         <td>{item.id}</td>
-                        <td><Link to={teamLink}>{item.name}</Link></td>
-                        <td>{item.designation}</td>
+                        <td>{item.name}</td>
                     </tr>)
-                }) }
+                ) }
+               </thead>
             </table> 
         </div>);
     }
 }
 
-export default TeamPage;
+export default TasksPage;
