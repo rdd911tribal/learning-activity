@@ -1,6 +1,4 @@
 Pre-installed apps:
-
-- docker desktop
 - minikube (hyperv or virtualbox)
 
 Steps:
