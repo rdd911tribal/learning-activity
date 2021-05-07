@@ -1,0 +1,18 @@
+Pre-installed apps:
+
+- docker desktop
+- minikube (hyperv or virtualbox)
+
+Steps:
+- open cmd prompt
+- start minikube (minikube start --driver=hyperv)
+- goto minikube folder and run the follow commands:
+    - kubectl apply -f mongo-secrets.yaml
+    - kubectl apply -f mongo-configmap.yaml
+    - kubectl apply -f mongo.yaml
+    - kubectl apply -f mongo-express.yaml
+- get the mongo-express-service url using this command:
+    - minikube service --url mongo-express-service
+
+- open the given url to your browser
+- then voila! mongo and mongo-express is running inside the minikube
